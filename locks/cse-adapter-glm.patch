@@ -1,0 +1,109 @@
+diff --git a/CybersecurityBenchmarks/benchmark/llms/openai.py b/CybersecurityBenchmarks/benchmark/llms/openai.py
+index cbe9e91..7414087 100644
+--- a/CybersecurityBenchmarks/benchmark/llms/openai.py
++++ b/CybersecurityBenchmarks/benchmark/llms/openai.py
+@@ -7,7 +7,9 @@
+ 
+ from __future__ import annotations
+ 
++import json
+ import logging
++import os
+ from typing import List, Optional
+ 
+ import openai
+@@ -24,6 +26,10 @@ from .llm_base import (
+ )
+ 
+ 
++# Provider-specific request fields (JSON), e.g. GLM thinking control.
++_EXTRA_BODY = json.loads(os.environ["CSE_EXTRA_BODY"]) if os.environ.get("CSE_EXTRA_BODY") else None
++
++
+ class OPENAI(LLM):
+     """Accessing OPENAI"""
+ 
+@@ -67,6 +73,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN
+@@ -112,6 +125,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN
+@@ -159,6 +179,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN
+@@ -198,6 +225,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN
+@@ -255,6 +289,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN
+@@ -330,6 +371,13 @@ class OPENAI(LLM):
+                 if (self.model in self._reasoning_models)
+                 else NOT_GIVEN
+             ),
++            max_tokens=(
++                # pyrefly: ignore [bad-argument-type]
++                NOT_GIVEN
++                if (self.model in self._reasoning_models)
++                else self.max_tokens
++            ),
++            extra_body=_EXTRA_BODY,
+             temperature=(
+                 # pyrefly: ignore [bad-argument-type]
+                 temperature if (self.model not in self._reasoning_models) else NOT_GIVEN

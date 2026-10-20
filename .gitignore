@@ -1,0 +1,13 @@
+# Ignore everything by default (keys, venv, upstream clone, run outputs, private helper scripts)
+*
+!.gitignore
+!README.md
+!TODO-vertex-purplellama.md
+!run_cse_smoke.sh
+!locks/
+!locks/cse-commit.txt
+!locks/cse-adapter-glm.patch
+!locks/cse-dataset.sha256
+!locks/cse-requirements.txt
+!locks/cse-tasks.txt
+!locks/cse-help.txt

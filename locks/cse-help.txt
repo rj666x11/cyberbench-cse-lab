@@ -1,0 +1,109 @@
+~/cyberbench-lab/envs/cse/lib/python3.10/site-packages/paramiko/pkey.py:100: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  "cipher": algorithms.TripleDES,
+~/cyberbench-lab/envs/cse/lib/python3.10/site-packages/paramiko/transport.py:259: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  "class": algorithms.TripleDES,
+usage: run.py [-h] --benchmark BENCHMARK [--llm-under-test LLM_UNDER_TEST]
+              [--prompt-path PROMPT_PATH] --response-path RESPONSE_PATH
+              [--stat-path STAT_PATH] [--judge-llm JUDGE_LLM]
+              [--expansion-llm EXPANSION_LLM]
+              [--judge-prompt-path JUDGE_PROMPT_PATH]
+              [--judge-response-path JUDGE_RESPONSE_PATH]
+              [--run-llm-in-parallel [RUN_LLM_IN_PARALLEL]] [--truncate-input]
+              [--should-cleanup-after-eval]
+              [--num-queries-per-prompt NUM_QUERIES_PER_PROMPT]
+              [--num-test-cases NUM_TEST_CASES] [--debug] [--enable-cache]
+              [--cache-file CACHE_FILE] [--agent AGENT]
+              [--enable-lf ENABLE_LF] [--max-tokens MAX_TOKENS]
+              [--cot-end-tokens [COT_END_TOKENS ...]]
+              [--additional-args ADDITIONAL_ARGS]
+              [--container-repository CONTAINER_REPOSITORY]
+              [--input-modality INPUT_MODALITY]
+
+Run the Cybersecurity Benchmarks.
+
+options:
+  -h, --help            show this help message and exit
+  --benchmark BENCHMARK
+                        This is the argument to specify which benchmark to
+                        run. Currently supported benchmarks are: autocomplete,
+                        instruct, mitre.
+  --llm-under-test LLM_UNDER_TEST
+                        LLM to benchmark provided as
+                        <PROVIDER>::<MODEL>(::<API KEY>)?(::BASE_URL)?, e.g.,
+                        OPENAI::gpt-3.5-turbo::<YOUR API KEY>
+  --prompt-path PROMPT_PATH
+                        The under-test LLM(s) would be queried with the
+                        prompts in this file. This argument works for
+                        benchmarks: autocomplete, instruct, mitre.
+  --response-path RESPONSE_PATH
+                        The under-test LLM(s) would store their responses in
+                        this file. This argument works for benchmarks:
+                        autocomplete, instruct, mitre.
+  --stat-path STAT_PATH
+                        After processing the under-test LLM's responses, the
+                        final status would be stored in this file. This
+                        argument works for benchmarks: autocomplete, instruct,
+                        mitre.
+  --judge-llm JUDGE_LLM
+                        Used for MITRE benchmark. We need to specify the llm
+                        model to judge the final expanded response as
+                        <PROVIDER>::<MODEL>(::<API KEY>)?(::BASE_URL)?, e.g.,
+                        OPENAI::gpt-3.5-turbo::<YOUR API KEY>
+  --expansion-llm EXPANSION_LLM
+                        Used for MITRE benchmark. We need to specify the llm
+                        model to expand the context from the initial query
+                        response as <PROVIDER>::<MODEL>(::<API
+                        KEY>)?(::BASE_URL)?, e.g.,
+                        OPENAI::gpt-3.5-turbo::<YOUR API KEY>
+  --judge-prompt-path JUDGE_PROMPT_PATH
+                        Used for Autonomous Uplift benchmark. The judge LLM is
+                        queried with the prompts in this file.
+  --judge-response-path JUDGE_RESPONSE_PATH
+                        Used for MITRE benchmark. The path to save the judge
+                        responses.
+  --run-llm-in-parallel [RUN_LLM_IN_PARALLEL]
+                        Specify the number of parallel calls to the LLM to
+                        speed up execution. When not provided, it defaults to
+                        1 thread. When set as a flag (--run-llm-in-parallel),
+                        it defaults to 16 threads. Users can also specify the
+                        number of threads, e.g., --run-llm-in-parallel=8.
+  --truncate-input      Set this argument to truncate the input provided to
+                        the LLM.
+  --should-cleanup-after-eval
+                        Set this argument to configure post-evaluation
+                        cleanup.
+  --num-queries-per-prompt NUM_QUERIES_PER_PROMPT
+                        Set the number of queries per prompt. Default value is
+                        1.
+  --num-test-cases NUM_TEST_CASES
+                        Only set this argument for testing purpose: If set to
+                        a positive value, we test the given number of prompts
+                        instead of all prompts.
+  --debug               Enable debug logging
+  --enable-cache        Enable caching of LLM responses to a local file.
+  --cache-file CACHE_FILE
+                        Specify the cache file path. Default is
+                        'llm_cache.json'.
+  --agent AGENT         For agentic benchmarks - which agent implementation to
+                        use.
+  --enable-lf ENABLE_LF
+                        Optional keyword to enable LlamaFirewall on all input
+                        and output layers.
+  --max-tokens MAX_TOKENS
+                        Set the max token size for querying LLMs.
+  --cot-end-tokens [COT_END_TOKENS ...]
+                        A list of strings that should be used to locate the
+                        end of the CoT.
+  --additional-args ADDITIONAL_ARGS
+                        Additional arguments to pass to the benchmark.
+  --container-repository CONTAINER_REPOSITORY
+                        Specify a reference to a container repository
+                        containing images used in this benchmark to avoid
+                        rebuilding images locally. Ensure this does not point
+                        to ARVO images, but rather images produced by our
+                        benchmark.
+  --input-modality INPUT_MODALITY
+                        Optional keyword to specify the input
+                        modality/modialities for the benchmark. Currently
+                        supported modalities are: text, image, text_and_image
+                        for ThreatIntelReasoning benchmark.
